@@ -1,5 +1,7 @@
-package com.shopping.list.api;
+package com.shopping.list.rest;
 
+
+import com.shopping.list.api.ShoppingRecourse;
 import com.shopping.list.dto.Card;
 
 import javax.ws.rs.Consumes;
@@ -10,25 +12,27 @@ import javax.ws.rs.core.MediaType;
 import java.util.List;
 
 @Path("/shopping")
-public interface ShoppingRecourse {
-
-    /**
-     * POST  /cards : user card list synchronization.
-     *
-     * @param currentDeviceList current shopping list on user device
-     * @return merged shopping list from server
-     */
+public class ShoppingRecourseImpl implements ShoppingRecourse {
     @POST
     @Path("/cards")
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    List<Card> syncCustomerCards(List<Card> currentDeviceList);
+    @Override
+    public List<Card> syncCustomerCards(List<Card> currentDeviceList) {
+        return null;
+    }
 
     @POST
     @Path("card/create")
-    void create(Card list);
+    @Override
+    public void create(Card list) {
+        //TODO
+    }
 
     @POST
     @Path("card/remove")
-    void remove(String cardId);
+    @Override
+    public void remove(String cardId) {
+        //TODO
+    }
 }

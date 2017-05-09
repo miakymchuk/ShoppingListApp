@@ -1,34 +1,36 @@
 package com.shopping.list.domain;
 
-import javax.persistence.*;
-import java.io.Serializable;
-import java.util.List;
+import com.shopping.list.dto.Status;
+import lombok.Data;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 
-import lombok.Getter;
-import lombok.Setter;
+import javax.persistence.*;
+import java.util.List;
+import java.util.Set;
+
 /**
  * A shopping list.
  */
 @Entity
 @Table(name = "card")
-@Getter
-@Setter
-public class Card {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "card_id")
-    private Long id;
+@org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+@Data
+public class Card extends AbstractPersistentObject {
 
     @Column(name = "name")
     private String name;
 
     @ManyToOne
-    @JoinColumn(name = "owner", referencedColumnName = "user_id", nullable = false)
+    @JoinColumn(name = "owner", nullable = false)
     private User owner;
 
+    @Column(name = "card_status")
+    private Status status;
 
-    @ManyToOne
+    @OneToMany(mappedBy = "card_id")
+    private Set<CustomerItem> shoppingList;
+
+    @OneToMany
     @JoinTable(name = "shared_card_user", joinColumns = @JoinColumn(name = "card_id"),
             inverseJoinColumns = @JoinColumn(name = "user_id"))
     private List<User> allowedUsers;

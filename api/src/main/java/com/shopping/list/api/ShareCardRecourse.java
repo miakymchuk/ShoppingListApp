@@ -1,6 +1,6 @@
 package com.shopping.list.api;
 
-import com.shopping.list.dto.Card;
+import com.shopping.list.dto.CardDto;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -15,5 +15,5 @@ public interface ShareCardRecourse {
 
     @GET
     @Path("/{userId}/accept/{cardId}")
-    Card accept(@PathParam("userId")String userId, @PathParam("cardId") String cardId);
+    CardDto accept(@PathParam("userId")String userId, @PathParam("cardId") String cardId);
 }

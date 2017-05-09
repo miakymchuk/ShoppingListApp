@@ -1,29 +1,17 @@
 package com.shopping.list.domain;
 
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 
 import javax.persistence.*;
 
-
-/**
- * A map, server card id vs customer device card id.
- */
-@Entity
-@Table(name = "customer_device_card_map")
-@Getter
-@Setter
 @Data
-public class CustomerDeviceCardMap {
+@Entity
+@Table(name = "customer_device_card_item_map")
+public class CustomerDeviceCardItemMap {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "customer_device_card_map_id")
+    @Column(name = "customer_device_card_item_map_id")
     private Long id;
-
-    @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
-    private User user;
 
     @ManyToOne
     @JoinColumn(name = "customer_device_id")
@@ -33,6 +21,10 @@ public class CustomerDeviceCardMap {
     @JoinColumn(name = "card_id", nullable = false)
     private Card card;
 
-    @Column(name = "device_card_id", nullable = false)
+    @ManyToOne
+    @JoinColumn(name = "card_item_id", nullable = false)
+    private CustomerItem customerItem;
+
+    @Column(name = "device_card_item_id", nullable = false)
     private Long deviceCardId;
 }

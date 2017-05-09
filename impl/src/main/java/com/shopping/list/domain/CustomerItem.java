@@ -1,5 +1,6 @@
 package com.shopping.list.domain;
 
+import com.shopping.list.dto.CardItemActionType;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -12,12 +13,7 @@ import javax.persistence.*;
 @Table(name = "customer_item")
 @Getter
 @Setter
-public class CustomerItem {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "customer_item_id")
-    private Long id;
+public class CustomerItem extends AbstractPersistentObject {
 
     @Column(name = "name")
     private String name;
@@ -26,5 +22,12 @@ public class CustomerItem {
     private boolean markedAsChecked;
 
     @Column(name = "quantity_description")
+    private CardItemActionType status;
+
+    @Column(name = "quantity_description")
     private String quantityDescription;
+
+    @ManyToOne
+    @JoinColumn(name = "card_id", nullable = false)
+    private Card card;
 }

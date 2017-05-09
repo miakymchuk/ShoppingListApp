@@ -21,6 +21,6 @@ public class CustomerDevice {
     private String uniqueDeviceId;
 
     @ManyToOne
-    @JoinColumn(name = "user_id", referencedColumnName = "user_id", nullable = false)
+    @JoinColumn(name = "user_id", nullable = false)
     private User user;
 }
